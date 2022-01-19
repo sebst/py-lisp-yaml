@@ -1,26 +1,20 @@
 - helloworld:
 - say:
-  - what: Hallo
+  - what: Hello
 - say:
-  - what: Bitte geben Sie Ihren Namen ein
+  - what: Please enter your name
 - store:
   - what: input
   - to: name
 - say:
-  - what: Hallo
-- say:
-  - what:
-    - get_store:
-      - from: name
-- say:
   - what:
     - concat:
-      - Hallo, 
+      - Hello, 
       - get_store:
         - from: name
       - "!"
       - "\n"
-      - Herzlich Willkommen
+      - Welcome
 - ifeq:
   - val1:
     - get_store:
@@ -28,14 +22,16 @@
   - val2: Bas
   - then:
     - say:
-      - what: "Name ok"
+      - what: "Oh, you're Bas!"
+- say:
+  - what: -------------------------------
+- say:
+  - what: Secret number guessing game! You have 3 tries
 - repeat:
-  - 2
+  - 3
   - what:
     - say:
-      - what: Bitte geben Sie einen Code ein
-    # - say:
-    #   - what: Hallo2
+      - what: Enter a secret code
     - store:
       - what: input
       - to: number
@@ -46,18 +42,18 @@
       - val2: 123
       - then:
         - say:
-          - what: Richtig!
+          - what: That's right!
         - break
       - else:
         - say:
-          - what: Code nicht richtig.
+          - what: That's wrong
 - say:
   - what: -------------------------------
 - store:
   - what: 10
   - to: secret_number
 - say:
-  - what: Geheimspeicher auslesen
+  - what: Access Internal Secret storage. What is the name of the internal secret storage?
 - store:
   - what: input
   - to: secret_store
@@ -67,34 +63,17 @@
       - from:
         - get_store:
           - from: secret_store
-- say:
-  - what: -------------------------------
-
-
-- store:
-  - to: addition
-  - what: 12
-- say:
-  - what:
-    - get_store:
-      - from: addition
-- say:
-  - what:
-    - plus:
-      - -1000
-      - get_store:
-        - from: addition
 
 - say:
   - what: -------------------------------
 
 - say:
-  - what: "Bitte geben Sie den ersten Summanden ein!"
+  - what: "Type the first number for addition"
 - store:
   - to: sum1
   - what: input
 - say:
-  - what: "Bitte geben Sie den zweiten Summanden ein!"
+  - what: "Type the second number for addition"
 - store:
   - what: input
   - to: sum2
@@ -108,9 +87,17 @@
 - say:
   - what:
     - concat:
-      - "Das Ergebnis lautet:"
+      - "The result is: "
+      - get_store:
+        - from: sum1
+      - "+"
+      - get_store:
+        - from: sum2
+      - "="
       - plus:
         - get_store:
           - from: sum1
         - get_store:
           - from: sum2
+- say:
+  - what: -------------------------------

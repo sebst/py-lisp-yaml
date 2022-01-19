@@ -17,13 +17,13 @@ class Parser:
         if type(line) == str or type(line) == int:
             return self.str_or_func(line)
         name = list(line.keys())[0]
-        fn = self.__getattribute__("exp_"+name)
+        fn = self.__getattribute__("exposed_"+name)
         return fn(line[name])
 
 
     def str_or_func(self, x):
         try:
-            fn = self.__getattribute__("exp_"+x)
+            fn = self.__getattribute__("exposed_"+x)
             return fn()
         except Exception as e:
             if isinstance(e, ControlException):
@@ -31,29 +31,29 @@ class Parser:
             return x
 
 
-    def exp_break(self, *args):
+    def exposed_break(self, *args):
         raise BreakException
 
 
-    def exp_get_store(self, *args, **kwargs):
+    def exposed_get_store(self, *args, **kwargs):
         fr = args[0][0]
-        s = self.exp_what(fr)
+        s = self.exposed_what(fr)
         try:
             return self._store.get(s)
         except:
             print("ERR", s)
 
 
-    def exp_store(self, *args, **kwargs):
+    def exposed_store(self, *args, **kwargs):
         kwargs = (args[0][0] | args[0][1])
-        self._store[kwargs['to']] = self.exp_what(kwargs['what'])
+        self._store[kwargs['to']] = self.exposed_what(kwargs['what'])
 
 
-    def exp_input(self):
-        return input("Please enter some value:")
+    def exposed_input(self):
+        return input("> ")
 
 
-    def exp_what(self, *args, **kwargs):
+    def exposed_what(self, *args, **kwargs):
         assert len(args) == 1
         arg = args[0]
         if type(arg) == dict:
@@ -66,21 +66,21 @@ class Parser:
         return self.exec_line(res)
 
 
-    exp_from = exp_else = exp_then = exp_val1 = exp_val2 = exp_what
+    exposed_from = exposed_else = exposed_then = exposed_val1 = exposed_val2 = exposed_what
 
 
-    def exp_helloworld(self, *args):
+    def exposed_helloworld(self, *args):
         print("Hello World")
 
 
-    def exp_say(self, *args, **kwargs):
+    def exposed_say(self, *args, **kwargs):
         for arg in args:
             for code in arg:
                 what = self.exec_line(code)
         print(what)
 
 
-    def exp_ifeq(self, arg):
+    def exposed_ifeq(self, arg):
         val1 = self.exec_line(arg[0])
         val2 = self.exec_line(arg[1])
         if str(val1) == str(val2):
@@ -95,7 +95,7 @@ class Parser:
                 raise
 
 
-    def exp_repeat(self, arg):
+    def exposed_repeat(self, arg):
         n = arg[0]
         for code in arg[1:]:
             for _ in range(int(n)):
@@ -105,15 +105,15 @@ class Parser:
                     break
 
 
-    def exp_concat(self, arg):
+    def exposed_concat(self, arg):
         s  = ""
         for code in arg:
-            s += str(self.exp_what(code))
+            s += str(self.exposed_what(code))
         return s
 
 
-    def exp_plus(self, arg):
-        return sum(int(self.exp_what(code)) for code in arg)
+    def exposed_plus(self, arg):
+        return sum(int(self.exposed_what(code)) for code in arg)
 
 
 if __name__=="__main__":

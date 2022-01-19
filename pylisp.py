@@ -14,7 +14,6 @@ class Parser:
 
 
     def exec_line(self, line):
-        # print("EXEC LINE", line)
         if type(line) == str or type(line) == int:
             return self.str_or_func(line)
         name = list(line.keys())[0]
@@ -23,7 +22,6 @@ class Parser:
 
 
     def str_or_func(self, x):
-        # print("aaaaa", x)
         try:
             fn = self.__getattribute__("exp_"+x)
             return fn()
@@ -56,7 +54,6 @@ class Parser:
 
 
     def exp_what(self, *args, **kwargs):
-        # print("what", args)
         assert len(args) == 1
         arg = args[0]
         if type(arg) == dict:
@@ -66,13 +63,7 @@ class Parser:
             return res[0] if len(res) == 1 else res
         else:
             res = arg
-        # return self.str_or_func(res)
         return self.exec_line(res)
-        # try:
-        #     return self.exec_line(res)
-        # except AttributeError:
-        #     print("LLLLLLL", res)
-        #     return self.str_or_func(res)
 
 
     exp_from = exp_else = exp_then = exp_val1 = exp_val2 = exp_what
@@ -90,7 +81,6 @@ class Parser:
 
 
     def exp_ifeq(self, arg):
-        # val1, val2, then = [self.exec_line(i) for i in arg[0]]
         val1 = self.exec_line(arg[0])
         val2 = self.exec_line(arg[1])
         if str(val1) == str(val2):
@@ -107,10 +97,8 @@ class Parser:
 
     def exp_repeat(self, arg):
         n = arg[0]
-        # print("rre", arg[1:])
         for code in arg[1:]:
-            for i in range(int(n)):
-                # print("code", code)
+            for _ in range(int(n)):
                 try:
                     self.exec_line(code)
                 except BreakException:

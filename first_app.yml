@@ -1,0 +1,116 @@
+- helloworld:
+- say:
+  - what: Hallo
+- say:
+  - what: Bitte geben Sie Ihren Namen ein
+- store:
+  - what: input
+  - to: name
+- say:
+  - what: Hallo
+- say:
+  - what:
+    - get_store:
+      - from: name
+- say:
+  - what:
+    - concat:
+      - Hallo, 
+      - get_store:
+        - from: name
+      - "!"
+      - "\n"
+      - Herzlich Willkommen
+- ifeq:
+  - val1:
+    - get_store:
+      - from: name
+  - val2: Bas
+  - then:
+    - say:
+      - what: "Name ok"
+- repeat:
+  - 2
+  - what:
+    - say:
+      - what: Bitte geben Sie einen Code ein
+    # - say:
+    #   - what: Hallo2
+    - store:
+      - what: input
+      - to: number
+    - ifeq:
+      - val1:
+        - get_store:
+          - from: number
+      - val2: 123
+      - then:
+        - say:
+          - what: Richtig!
+        - break
+      - else:
+        - say:
+          - what: Code nicht richtig.
+- say:
+  - what: -------------------------------
+- store:
+  - what: 10
+  - to: secret_number
+- say:
+  - what: Geheimspeicher auslesen
+- store:
+  - what: input
+  - to: secret_store
+- say:
+  - what:
+    - get_store:
+      - from:
+        - get_store:
+          - from: secret_store
+- say:
+  - what: -------------------------------
+
+
+- store:
+  - to: addition
+  - what: 12
+- say:
+  - what:
+    - get_store:
+      - from: addition
+- say:
+  - what:
+    - plus:
+      - -1000
+      - get_store:
+        - from: addition
+
+- say:
+  - what: -------------------------------
+
+- say:
+  - what: "Bitte geben Sie den ersten Summanden ein!"
+- store:
+  - to: sum1
+  - what: input
+- say:
+  - what: "Bitte geben Sie den zweiten Summanden ein!"
+- store:
+  - what: input
+  - to: sum2
+- say:
+  - what:
+    - plus:
+      - get_store:
+        - from: sum1
+      - get_store:
+        - from: sum2
+- say:
+  - what:
+    - concat:
+      - "Das Ergebnis lautet:"
+      - plus:
+        - get_store:
+          - from: sum1
+        - get_store:
+          - from: sum2

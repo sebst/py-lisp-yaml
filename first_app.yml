@@ -22,7 +22,7 @@
   - val2: Bas
   - then:
     - say:
-      - what: "Oh, you're Bas!"
+      - what: Oh, you're Bas!
 - say:
   - what: -------------------------------
 - say:
@@ -63,10 +63,8 @@
       - from:
         - get_store:
           - from: secret_store
-
 - say:
   - what: -------------------------------
-
 - say:
   - what: "Type the first number for addition"
 - store:

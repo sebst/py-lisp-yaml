@@ -1,0 +1,38 @@
+- ingredients:
+  - what: 
+    - qty: 22.5 ounces
+    - name: flour
+  - what:
+    - qty: 0.5 ounces
+    - name: sugar
+  # - what: sugar
+  #   - howmuch: 0.5 ounces
+  # - what: salt
+  #   - howmuch: 0.35 ounces
+  # - what: oliveoil
+  #   - howmuch: 1.125 ounces
+  # - what: yeast
+  #   - howmuch: 0.35 ounces
+  # - what: water
+  #   - howmuch: 15 ounces
+- instructions:
+  - combine:
+    - what:
+      - flour
+      - salt
+      - sugar
+      - yeast
+  - add:
+    - what:
+      - oliveoil
+      - water
+  - pulse:
+    - 5
+  - mix:
+    - howlong: 15
+  - form:
+    - what: ball
+  - divide:
+    - into: 3
+  - place:
+    to: fridge
